@@ -73,13 +73,13 @@ void display(){
     printf("List->%d->", temp->data);
     for (temp = head->next; temp != head; temp = temp->next)
         printf("%d->", temp->data);
-    printf("NULL\n");
+    printf("List\n");
 }
-
 int main(){
     int n, temp;
     scanf("%d", &n);
-
+    
+    int nn = n;
     while (n--){
         scanf("%d", &temp);
         addnode(temp);
@@ -87,6 +87,16 @@ int main(){
     
     int x, m;
     scanf("%d %d", &x, &m);
-    
-    insert(x, m);
+    if (nn == 1){                       // for 1 node list
+        printf("List->%d->List\n", head->data);
+        if (head->data != x)            // exception case
+            printf("Target Element is Not Found\n");
+        else{
+            addnode(m);
+            display();        
+    }
+    }else{
+        display();
+        insert(x, m);
+    }
 }

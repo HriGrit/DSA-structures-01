@@ -28,8 +28,13 @@ void addnode(int x){
 
 void delete(int t){
     struct node *temp;
-    for (temp = head; (temp != NULL) & (temp->data != t); temp = temp->next);
-
+    if (head->next == NULL){
+        if (head->data != t)
+            printf("Target Element is Not Found\n");
+        else
+            for (temp = head; (temp != NULL) & (temp->data != t); temp = temp->next);
+    }
+    
     if (temp->next == NULL){
         if (temp->data != t)
             printf("Target Element is Not Found\n");
