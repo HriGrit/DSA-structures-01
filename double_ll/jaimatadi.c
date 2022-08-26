@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-//no work
+
 struct node{
     int data;
     struct node *next;
@@ -8,7 +8,7 @@ struct node{
 };
 
 struct node *head = NULL;
-void display();
+
 void addnode(int x){
     struct node *current = (struct node *)malloc(sizeof(struct node));
 
@@ -28,21 +28,14 @@ void addnode(int x){
 
 void delete(int t){
     struct node *temp;
+    printf("Here");
     if (head->next == NULL){
-        if (head->data != t)
+        if (temp->data != t)
             printf("Target Element is Not Found\n");
-        else{
-            display();
-            printf("List is Empty\n");
-        }
     }else{
-        for (temp = head; temp->next != NULL && temp->data != t; temp = temp->next);
-        if (temp->data == t){
-            if (temp->next != NULL){
-                temp->next->next->prev = temp;
-                temp->next = temp->next->next;
-            }
-        }
+        for (temp = head; (temp->next != NULL) && (temp->data != t); temp = temp->next);
+        temp->next->prev = temp;
+        temp->next = temp->next->next;
     }
 }
 
@@ -65,7 +58,7 @@ int main(){
     int t;
     scanf("%d", &t);
     
-    display();
     delete(t);
     display();
+    
 }

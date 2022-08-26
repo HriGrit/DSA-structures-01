@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-//no work
+
 struct node{
     int data;
     struct node *next;
@@ -26,23 +26,29 @@ void addnode(int x){
     }
 }
 
-void delete(int t){
-    struct node *temp;
+void delete(int x){
     if (head->next == NULL){
-        if (head->data != t)
+        if (head->data != x)
             printf("Target Element is Not Found\n");
-        else{
+        else
             display();
-            printf("List is Empty\n");
-        }
     }else{
-        for (temp = head; temp->next != NULL && temp->data != t; temp = temp->next);
-        if (temp->data == t){
-            if (temp->next != NULL){
-                temp->next->next->prev = temp;
-                temp->next = temp->next->next;
-            }
+        struct node *temp = head;
+        do{
+            temp = temp->next;
+        }while(temp->next != NULL && temp->data != x);
+        if (temp->next == NULL){
+            if (temp->data != x)
+                printf("Target Element is Not Found\n");
+        }else if (temp->next->next == NULL){
+            temp->next->prev = NULL;
+            temp->next = NULL;
+        }else{
+            temp->next->next->prev = temp;
+            free(temp->next);
+            temp->next = temp->next->next;
         }
+        display();
     }
 }
 
@@ -59,13 +65,12 @@ int main(){
     scanf("%d", &n);
 
     while (n--){
-        scanf("%d", &temp);
+        scanf("%d", &temp); 
         addnode(temp);
     }
+    display();
+    
     int t;
     scanf("%d", &t);
-    
-    display();
     delete(t);
-    display();
 }
